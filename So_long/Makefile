@@ -1,24 +1,41 @@
-SRCS			=
+NAME		=	so_long
 
-OBJS			= $(SRCS:.c=.o)
+CC			=	clang
 
-CC				= gcc
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror -I.
+FLAG		=	-Wall -Wextra -Werror
 
-NAME			= solong.a
+MLX_FILE	=	libmlx.a
 
-$(NAME):		$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+MLX_FLAG	=	-lX11 -lXext -lmlx
 
-all:			$(NAME)
+MLX_PATH	=	./minilibx-linux/
+
+SRC			=	so_long_main.c \
+
+OBJ			=	$(SRC:.c=.o)
+
+.c.o:
+			$(CC) $(MLX_FLAG) -c $< -o $@
+
+all:		$(MLX_PATH) $(NAME)
+
+$(NAME):	$(OBJ)
+			$(CC) $(MLX_FLAG) -fsanitize=address -o $@ $^ $(LIB)
+
+$(MLX_PATH):
+			@echo " [ .. ] | Compiling minilibx.."
+			@make -s -C mlx
+			@echo " [ OK ] | Minilibx ready!"
+
 
 clean:
-				$(RM) $(OBJS)
+			@rm -rf $(OBJ) obj
+			@echo "object files removed."
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean:		clean
+			@rm -rf $(NAME)
+			@echo "binary file removed."
 
-re:				fclean $(NAME)
-	
-.PHONY:			all clean fclean re
+re:			fclean all
+
+.PHONY:		all clean fclean re
