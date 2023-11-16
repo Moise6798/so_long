@@ -6,7 +6,7 @@
 /*   By: niotzenb <niotzenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:54:27 by niotzenb          #+#    #+#             */
-/*   Updated: 2023/11/16 11:33:49 by niotzenb         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:14:54 by niotzenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,23 @@
 # include <X11/keysym.h>
 # include <stdio.h>
 
+# define RED_PIXEL 0xFF0000
+# define GREEN_PIXEL 0xFF00
+
 typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*textures[5];
 }	t_data;
+
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+	int	color;
+}	t_rect;
 
 #endif
