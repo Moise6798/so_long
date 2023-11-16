@@ -6,7 +6,7 @@
 /*   By: niotzenb <niotzenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:54:27 by niotzenb          #+#    #+#             */
-/*   Updated: 2023/11/16 12:14:54 by niotzenb         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:40:41 by niotzenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@
 # include <X11/keysym.h>
 # include <stdio.h>
 
+# define WINDOW_WIDTH 600
+# define WINDOW_HEIGHT 300
+
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00
+# define WHITE_PIXEL 0xFFFFFF
 
 typedef struct s_data
 {

@@ -6,7 +6,7 @@
 /*   By: niotzenb <niotzenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:52:59 by niotzenb          #+#    #+#             */
-/*   Updated: 2023/11/16 12:28:11 by niotzenb         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:43:36 by niotzenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,23 @@ int	handle_keypress(int keysym, t_data *data)
 		data->win_ptr = NULL;
 	}
 	return (0);
+}
+
+void	render_background(t_data *data, int color)
+{
+	int	i;
+	int	j;
+
+	if (data->win_ptr == NULL)
+		return ;
+	i = 0;
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		while (j < WINDOW_WIDTH)
+			mlx_pixel_put(data->mlx_ptr, data->win_ptr, j++, i, color);
+		++i;
+	}
 }
 
 int	render_rectangle(t_data *data, t_rect rect)
@@ -47,9 +64,10 @@ int	render_rectangle(t_data *data, t_rect rect)
 
 int	render(t_data *data)
 {
-	render_rectangle(data, (t_rect){1920 - 500, 1080 - 500, 600,
-			600, GREEN_PIXEL});
-	render_rectangle(data, (t_rect){0, 0, 600, 600, RED_PIXEL});
+	render_background(data, WHITE_PIXEL);
+	render_rectangle(data, (t_rect){WINDOW_WIDTH - 100, WINDOW_HEIGHT - 100,
+		100, 100, GREEN_PIXEL});
+	render_rectangle(data, (t_rect){0, 0, 100, 100, RED_PIXEL});
 	return (0);
 }
 
@@ -60,7 +78,8 @@ int	main(void)
 	data.mlx_ptr = mlx_init();
 	if (data.mlx_ptr == NULL)
 		return (1);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, 1920, 1080, "hi :)");
+	data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
+			"hi :)");
 	if (data.win_ptr == NULL)
 	{
 		free(data.win_ptr);
