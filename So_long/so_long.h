@@ -6,33 +6,41 @@
 /*   By: niotzenb <niotzenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:54:27 by niotzenb          #+#    #+#             */
-/*   Updated: 2023/11/16 12:40:41 by niotzenb         ###   ########.fr       */
+/*   Updated: 2023/11/20 10:10:26 by niotzenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <unistd.h>
-# include <math.h>
+# include <string.h>
 # include <stdlib.h>
 # include "minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <stdio.h>
 
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
+# define WINDOW_WIDTH 1200
+# define WINDOW_HEIGHT 600
 
 # define RED_PIXEL 0xFF0000
 # define GREEN_PIXEL 0xFF00
 # define WHITE_PIXEL 0xFFFFFF
 
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
 typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*textures[5];
+	t_img	img;
 }	t_data;
 
 typedef struct s_rect
@@ -43,5 +51,7 @@ typedef struct s_rect
 	int	height;
 	int	color;
 }	t_rect;
+
+
 
 #endif
