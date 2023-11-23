@@ -6,7 +6,7 @@
 /*   By: niotzenb <niotzenb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:52:59 by niotzenb          #+#    #+#             */
-/*   Updated: 2023/11/20 10:07:02 by niotzenb         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:18:20 by niotzenb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,13 @@ int	handle_keypress(int keysym, t_data *data)
 	}
 	return (0);
 }
+
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
-	int		i;
 
-	i = img->bpp - 8;
-	pixel = img->addr + (y * img->line_len + x *(img->bpp / 8));
-	while (i >= 0)
-	{
-		if (img->endian != 0)
-			*pixel++ = (color >> i) & 0xFF;
-		else
-			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
-		i -= 8;
-	}
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(int *)pixel = color;
 }
 
 void	render_background(t_img *img, int color)
